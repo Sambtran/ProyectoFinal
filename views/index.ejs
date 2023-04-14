@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/index.css' />
+    <script type="module" src="/javascripts/index.js" ></script>
+  </head>
+  <body>
+    <div id="login">
+      <div id="loginanonimo">Entrar de manera anonima</div>
+      <div id="loginconuser">Entrar con usuario</div>
+    </div>
+    <%
+    for (var i = 1; i < 3; i++) {%>
+      <section class="seccion<%=i%>">seccion<%=i%></section>
+    <%
+    }
+    %>
+  </body>
+</html>

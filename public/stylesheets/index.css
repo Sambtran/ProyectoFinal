@@ -1,0 +1,40 @@
+*{
+    padding: 0; margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+html{
+    height: 100%;
+}
+body{
+    display: grid;
+    grid-template-columns: 1fr 1fr 0fr 0fr;
+    grid-template-rows: 1fr;
+    height: 100%;
+    transition: all 1s ease;
+}
+section{
+    background-color: red;
+}
+body>section:nth-child(3){
+    background-color: aqua;
+}
+main{
+    background-color: blue;
+}
+div#login{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 1fr;
+    position: absolute;
+    width: 60%;
+    height: 40%;
+    top: 30%;
+    left: 24%;
+    background-color: #00B7FF;
+    border: 1px solid salmon;
+    transition: all 1s ease;
+}
+#login>div:nth-child(1){
+    background-color: salmon;
+}
