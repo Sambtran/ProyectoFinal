@@ -19,6 +19,8 @@ let section1 = document.getElementById("seccion1")
             success: "succes",
         });
     });
+console.log(navigator)
+
 
 
 
