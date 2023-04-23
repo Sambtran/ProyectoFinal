@@ -11,7 +11,7 @@ body{
     grid-template-columns: 1fr 1fr 0fr 0fr;
     grid-template-rows: 1fr;
     height: 100%;
-    transition: all 1s ease;
+    transition: all 0.5s linear;
 }
 body>section:nth-child(1),body>section:nth-child(2){
     display: flex;
@@ -24,16 +24,27 @@ div#loginanonimo{
     background-color: darkolivegreen;
     height: 100%;
 }
+section#contenido{
+    display: flex;
+    height: 100%;
+}
 div#loginconuser{
     height: 100%;
     background-color: antiquewhite;
 }
 body>section:nth-child(3){
     display: flex;
-    background-color: aqua;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-content: center;
+
 }
 main{
     background-color: blue;
+}
+section#loged{
+    height: 100%;
+    display: none;
 }
 div#login{
     display: grid;
@@ -116,6 +127,9 @@ div#login{
     font-size: 14px;
     line-height: 1.5;
     margin: 40px;
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
 }
 .right {
     background: #474A59;

@@ -61,7 +61,9 @@ async function getusername(username){
         return lineas
      }catch (error){
         console.log(error)}
-
+     finally {
+        cliente.end()
+    }
 
 }
 async function validarusuario(username,password){
@@ -78,4 +80,11 @@ async function validarusuario(username,password){
         }
     }
 }
-module.exports = {crearCliente,georecogida,getusername,validarusuario}
+async function numeropaises(){
+    let cliente = await crearCliente()
+    await cliente.connect()
+    let sql = `select pais,count(*)  FROM "Informacion".geodata GROUP BY pais`
+    let resultado =  await cliente.query(sql)
+    return resultado.rows
+}
+module.exports = {crearCliente,georecogida,getusername,validarusuario,numeropaises}
