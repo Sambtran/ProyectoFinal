@@ -20,3 +20,12 @@ export  function tieneid(div,id){
         false
     }
 }
+export function  mostrarnav(nav){
+    const body = document.getElementsByTagName("main")[0]
+    $(nav).fadeIn("slow")
+    console.log(body)
+    body.style.height="97%"
+    setTimeout(()=>{
+        nav.style.position="relative"
+    },450)
+}

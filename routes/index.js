@@ -6,7 +6,7 @@ var geoip = require("geoip-lite")
 var express = require('express');
 const {log} = require("debug");
 var router = express.Router();
-const {georecogida, getusername, validarusuario, numeropaises} = require("./dao");
+const {georecogida, getusername, validarusuario, numeropaises,osRecogida,OSsimple} = require("./dao");
 const {hash, compare} = require("bcrypt");
 
 dotenv.config()
@@ -19,6 +19,13 @@ router.get('/', function(req, res, next) {
 router.get('/datosgraficos', async function(req, res, next) {
   console.log("entra en datos graficos")
   let resultado = await numeropaises()
+  console.log(resultado)
+  res.send(resultado)
+
+});
+router.get('/datosSO', async function(req, res, next) {
+  console.log("entra en datos graficos")
+  let resultado = await OSsimple()
   console.log(resultado)
   res.send(resultado)
 
@@ -39,9 +46,14 @@ router.post("/login",(req, res)=>{
 })
 router.post("/georecogida",(req, res)=>{
   let ip = req.body.ip
-  let cosas = geoip.lookup(ip.toString())
-  console.log(cosas)
-    georecogida(cosas,ip)
+  let geodatos = geoip.lookup(ip.toString())
+  let osName = req.body.osName
+  let osBits = req.body.osBits
+  let osVersion = req.body.osVersion
+  console.log(geodatos)
+    georecogida(geodatos,ip)
+    osRecogida(ip,osName,osBits,osVersion)
+
 })
 
 module.exports = router;

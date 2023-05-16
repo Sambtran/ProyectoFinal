@@ -87,4 +87,32 @@ async function numeropaises(){
     let resultado =  await cliente.query(sql)
     return resultado.rows
 }
-module.exports = {crearCliente,georecogida,getusername,validarusuario,numeropaises}
+async function osRecogida(ip,osName,osBits,osVersion){
+    let cliente = await crearCliente()
+
+    try {
+        await cliente.connect()
+        if(osBits==" x64"){
+            osBits=true
+        }else{
+            osBits=false
+        }
+        let sql = `insert into "Informacion".os (osrowid,"osName",osip,bits,"osVersion") values (default,'${osName}','${ip}',${osBits},'${osVersion}');`
+        const res = await cliente.query(sql)
+        return true
+    }catch (error){
+         return false
+    }
+    finally {
+        await cliente.end();
+
+    }
+}
+async function OSsimple(){
+    let cliente = await crearCliente()
+    await cliente.connect()
+    let sql = `select "osName",count(*)  FROM "Informacion".os GROUP BY "osName"`
+    let resultado =  await cliente.query(sql)
+    return resultado.rows
+}
+module.exports = {crearCliente,georecogida,getusername,validarusuario,numeropaises,osRecogida,OSsimple}
