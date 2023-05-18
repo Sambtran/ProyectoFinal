@@ -10,8 +10,8 @@ const nav = document.getElementsByTagName("nav")[0]
     var login = document.getElementById("login")
     let loginanonimo = document.getElementById("loginanonimo")
     function invocation(){
-       // Cookies.remove("user_id")
-       // Cookies.remove("cookiesaccepted")
+        Cookies.remove("user_id")
+        Cookies.remove("cookiesaccepted")
         console.log(Cookies.get("user_id")+"  "+Cookies.get("cookiesaccepted"))
         if(true){
             fetch('https://api.ipify.org/').then(
