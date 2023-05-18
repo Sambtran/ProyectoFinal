@@ -7,7 +7,7 @@ const bcrypt = require("bcrypt");
     let cliente = new Client({
         user: "alberto",
         host: "dpg-chj76ju7avj2pb5nhvsg-a",
-        database: "proyecto",
+        database: "proyecto_vl98",
         password: "ARtMXXgxQ6UXOz37tB7WP0YesR7a5kcy",
         port: "5432"
     })
