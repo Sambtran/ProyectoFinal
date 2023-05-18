@@ -7,8 +7,6 @@ html{
     height: 100%;
 }
 body{
-    background-color: #919191;
-    height: 100%;
 }
 main{
     display: grid;
@@ -43,16 +41,31 @@ body>section:nth-child(1),body>section:nth-child(2){
     align-content: center;
     background-color: red;
 }
+
 #tiposdegrafico{
-    height: 100%;
+    height: 98vh;
     background-color: lightgoldenrodyellow;
     display: flex;
     flex-flow: column wrap;
     justify-content: space-around;
+    grid-area: nt;
+}
+#customquery{
+    grid-area: cq;
 }
 #loged{
     display: grid;
-    grid-template-columns: 15% auto;
+    grid-template-columns: auto;
+    grid-area: lg;
+}
+#contgeneral{
+    display: grid;
+    grid-template-areas:
+"nt lg"
+"nt lg";
+}
+#OS>div,#geo>div{
+
 }
 div#loginanonimo{
     background-color: darkolivegreen;
@@ -97,10 +110,13 @@ article#lienzocontainers{
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
-#loged #OS{
+
+#loged #OS,#loged #geo{
     display: flex;
     flex-flow: row wrap;
 }
+#lienzocontainers>article{
+text-align: center}
 div#login{
     display: grid;
     grid-template-columns: 50% 50%;

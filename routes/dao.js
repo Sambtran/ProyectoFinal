@@ -71,20 +71,25 @@ async function validarusuario(username,password){
     var id = false
     for (let result of resultado) {
       if( await  bcrypt.compare(password, result.password)){
-          id=result.user_id
+          id=result.password
       }
-        if(isNaN(id)){
-            return false
-        }else{
-            return id
-        }
+        return id
     }
+}
+
+async function ponerenactivo(id){
+    let cliente = await crearCliente()
+    await cliente.connect()
+    let sql = `UPDATE "Informacion".users  SET "activo" = true WHERE "password" like '%${id}%' `
+    await cliente.query(sql)
+    await cliente.end();
 }
 async function numeropaises(){
     let cliente = await crearCliente()
     await cliente.connect()
     let sql = `select pais,count(*)  FROM "Informacion".geodata GROUP BY pais`
     let resultado =  await cliente.query(sql)
+    await cliente.end();
     return resultado.rows
 }
 async function osRecogida(ip,osName,osBits,osVersion){
@@ -113,6 +118,38 @@ async function OSsimple(){
     await cliente.connect()
     let sql = `select "osName",count(*)  FROM "Informacion".os GROUP BY "osName"`
     let resultado =  await cliente.query(sql)
+    await cliente.end();
+    return resultado.rows
+
+}
+async function datosOSversion(){
+    let cliente = await crearCliente()
+    await cliente.connect()
+    let sql = `select "osVersion",count(*) from "Informacion".os where "osName" like '%Windows%' group by "osVersion"`
+    let resultado =  await cliente.query(sql)
+    await cliente.end();
     return resultado.rows
 }
-module.exports = {crearCliente,georecogida,getusername,validarusuario,numeropaises,osRecogida,OSsimple}
+async function paisesdeUE(){
+    let cliente = await crearCliente()
+    await cliente.connect()
+    let sql = `select "pais",count(*) from "Informacion".geodata where eu=true group by pais`
+    let resultado =  await cliente.query(sql)
+    await cliente.end();
+    return resultado.rows
+}
+
+async function usuarioautorizado(token){
+    let cliente = await crearCliente()
+    await cliente.connect()
+    let sql = `SELECT "activo" from "Informacion".users where "password" like '%${token}%'`
+    let resultado =  await cliente.query(sql)
+    await cliente.end();
+    if(resultado.rows[0].activo==true){
+        return true
+    }else{
+        false
+    }
+}
+
+module.exports = {paisesdeUE,usuarioautorizado,crearCliente,ponerenactivo,georecogida,getusername,validarusuario,numeropaises,osRecogida,OSsimple,datosOSversion}

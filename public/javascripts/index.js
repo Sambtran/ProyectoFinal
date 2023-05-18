@@ -1,5 +1,6 @@
 import * as helper from "./helper.js";
 import {mostrarnav} from "./helper.js";
+var token
 document.addEventListener("DOMContentLoaded",()=>{
 $("#loged").hide();
 $("#tiposdegrafico").hide()
@@ -9,7 +10,7 @@ const nav = document.getElementsByTagName("nav")[0]
     var login = document.getElementById("login")
     let loginanonimo = document.getElementById("loginanonimo")
     function invocation(){
-        //Cookies.remove("user_id")
+       // Cookies.remove("user_id")
        // Cookies.remove("cookiesaccepted")
         console.log(Cookies.get("user_id")+"  "+Cookies.get("cookiesaccepted"))
         if(true){
@@ -45,7 +46,7 @@ const nav = document.getElementsByTagName("nav")[0]
         if(Cookies.get("user_id")!=undefined){
             body.style.gridTemplateColumns="0fr 0fr 1fr 0fr"
             $(".page").hide()
-            cargarusuario()
+            cargarusuario(Cookies.get("user_id"))
             $("#loged").show()
             mostrarnav(nav,body)
             $("#tiposdegrafico").fadeIn("slow")
@@ -171,10 +172,13 @@ const nav = document.getElementsByTagName("nav")[0]
                             }
                             $(".page").hide()
                             mostrarnav(nav,body)
+                            $.post( "/ponerenactivo",{id:result.id} )
+                            cargarusuario(result.id)}
+                        $("#loged").show()
+                        $("#tiposdegrafico").fadeIn("slow")
+                        token = result.id
                         }
-                             cargarusuario()}
-                            $("#loged").show()
-                            $("#tiposdegrafico").fadeIn("slow")
+
                 })
             })
         }
@@ -192,8 +196,44 @@ $(nav).hide()
         $("#cookies").hide()
   })}
 })
+var arraylienzos = []
+var seguro = 0
+function cargarusuario(token,tipo){
+    let lienzos = document.getElementsByClassName("lienzoOS")
+    let geos = document.getElementsByClassName("lienzoGEO")
 
-function cargarusuario(token){
+    let tiposfraficos = document.getElementsByClassName("tiposdegrafico")
+    let i = 0
+    if(seguro!=0){
+        for (let lenzillo of arraylienzos) {
+            lenzillo.destroy()
+        }
+    }
+    seguro++
+    for (const tiposfrafico of tiposfraficos) {
+        console.log(tiposfrafico)
+        if(i==0){
+            $(tiposfrafico).unbind()
+            $(tiposfrafico).bind("click",()=>{
+                cargarusuario(token,"bar")
+            })
+        }
+        if(i==1){
+            $(tiposfrafico).unbind()
+            $(tiposfrafico).bind("click",()=>{
+                cargarusuario(token,"doughnut")
+            })
+        }if(i==2){
+            $(tiposfrafico).unbind()
+            $(tiposfrafico).bind("click",()=>{
+                cargarusuario(token,"polarArea")
+            })
+        }
+        i++
+    }
+    if(tipo==undefined||tipo==null){
+        tipo="doughnut"
+    }
     $.get( "/datosSO" ).done(resultado=>{
         console.log(resultado)
         let datosgraficos = resultado
@@ -217,20 +257,31 @@ function cargarusuario(token){
                 label: ["OS"],
                 data: datainfo,
                 backgroundColor: [
-                    'rgb(123,147,250)',
-                    'rgb(252,105,105)',
-                    'rgb(108,108,108)'
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)',
+                    'rgb(101,255,83)',
+                    'rgba(39,40,44,0.39)',
+                    'rgb(0,255,177)',
+                    'rgb(135,148,77)',
                 ],
                 hoverOffset: 4
             }]
         };
-        new Chart(ctx, {
-            type: 'doughnut',
+      let lienzo1OS =  new Chart(ctx, {
+            type: tipo,
             data: data,
+          options:{
+              plugins: {
+                  title: {
+                      display: true,
+                      text: 'SO mas comunes'
+                  }
+              }}
         });
-
+        arraylienzos.push(lienzo1OS)
     })
-    $.get( "/datosSO" ).done(resultado=>{
+    $.post( "/datosOSversion",{token:token} ).done(resultado=>{
         console.log(resultado)
         let datosgraficos = resultado
         let labels = []
@@ -243,7 +294,7 @@ function cargarusuario(token){
             datainfo.push(parseInt(parseInt(dato.count)*100/total))
         }
         for (let dato of datosgraficos) {
-            labels.push(dato.osName)
+            labels.push(dato.osVersion)
         }
         console.log(datosgraficos)
         const ctx = $("#lienzoOS2")
@@ -253,17 +304,133 @@ function cargarusuario(token){
                 label: ["OS"],
                 data: datainfo,
                 backgroundColor: [
-                    'rgb(123,147,250)',
-                    'rgb(252,105,105)',
-                    'rgb(108,108,108)'
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)',
+                    'rgb(101,255,83)',
+                    'rgba(39,40,44,0.39)',
+                    'rgb(0,255,177)',
+                    'rgb(135,148,77)',
                 ],
                 hoverOffset: 4
             }]
         };
-        new Chart(ctx, {
+        let lienzo2OS =  new Chart(ctx, {
+            type: tipo,
+            data: data,
+            options:{
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Versiones de windows en %'
+                    }
+                }}
+        });
+        arraylienzos.push(lienzo2OS)
+        //GEO
+
+    })
+    $.get( "/datosgraficos" ).done(resultado=>{
+        console.log(resultado)
+        let datosgraficos = resultado
+        let labels = []
+        let datainfo = []
+        let total = 0
+        for (let dato of datosgraficos) {
+            total += parseInt(dato.count)
+        }
+        for (let dato of datosgraficos) {
+            datainfo.push(parseInt(parseInt(dato.count)*100/total))
+        }
+        for (let dato of datosgraficos) {
+            labels.push(dato.pais)
+        }
+        console.log(datosgraficos)
+        const ctx = $("#lienzeogeo1")
+        const data = {
+            labels:labels,
+            datasets: [{
+                label: ["Pais"],
+                data: datainfo,
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)',
+                    'rgb(101,255,83)',
+                    'rgba(39,40,44,0.39)',
+                    'rgb(0,255,177)',
+                    'rgb(135,148,77)',
+                ],
+                hoverOffset: 4
+            }]
+        };
+        const config = {
             type: 'doughnut',
             data: data,
+        };
+        let lienzo1geo=new Chart(ctx, {
+            type: tipo,
+            data: data,
+            options:{
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Paises mas comunes en %'
+                    }
+                }}
         });
+        arraylienzos.push(lienzo1geo)
+
+    })
+
+    $.post( "/paisesdeUE",{token:token} ).done(resultado=>{
+        console.log(resultado)
+        let datosgraficos = resultado
+        let labels = []
+        let datainfo = []
+        let total = 0
+        for (let dato of datosgraficos) {
+            total += parseInt(dato.count)
+        }
+        for (let dato of datosgraficos) {
+            datainfo.push(parseInt(parseInt(dato.count)*100/total))
+        }
+        for (let dato of datosgraficos) {
+            labels.push(dato.pais)
+        }
+        console.log(datosgraficos)
+        const ctx = $("#lienzeogeo2")
+        const data = {
+            labels:labels,
+            datasets: [{
+                label: ["Pais"],
+                data: datainfo,
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)',
+                    'rgb(101,255,83)',
+                    'rgba(39,40,44,0.39)',
+                    'rgb(0,255,177)',
+                    'rgb(135,148,77)',
+
+
+                ],
+                hoverOffset: 4
+            }]
+        };
+        let lienzo2geo=new Chart(ctx, {
+            type: tipo,
+            data: data,
+            options:{
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Paises mas comunes de la UE en %'
+                    }
+            }}
+        });
+        arraylienzos.push(lienzo2geo)
 
     })
 }
