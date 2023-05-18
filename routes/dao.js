@@ -6,9 +6,9 @@ const bcrypt = require("bcrypt");
  async function crearCliente(){
     let cliente = new Client({
         user: "alberto",
-        host: "localhost",
-        database: "Proyecto",
-        password: "123",
+        host: "dpg-chj76ju7avj2pb5nhvsg-a",
+        database: "proyecto",
+        password: "ARtMXXgxQ6UXOz37tB7WP0YesR7a5kcy",
         port: "5432"
     })
     return cliente
