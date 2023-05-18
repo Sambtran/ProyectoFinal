@@ -6,10 +6,11 @@ const bcrypt = require("bcrypt");
  async function crearCliente(){
     let cliente = new Client({
         user: "alberto",
-        host: "dpg-chj76ju7avj2pb5nhvsg-a",
+        host: "dpg-chj76ju7avj2pb5nhvsg-a.frankfurt-postgres.render.com",
         database: "proyecto_vl98",
         password: "ARtMXXgxQ6UXOz37tB7WP0YesR7a5kcy",
-        port: "5432"
+        port: "5432",
+        ssl:true
     })
     return cliente
 }

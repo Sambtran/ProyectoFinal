@@ -15,7 +15,7 @@ dotenv.config()
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render("./views/index.ejs", { title: 'Express' });
 
 });
 router.get('/datosgraficos', async function(req, res, next) {
