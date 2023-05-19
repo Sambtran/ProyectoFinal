@@ -10,21 +10,21 @@ const {georecogida, getusername, validarusuario, numeropaises,osRecogida,OSsimpl
   ponerenactivo, usuarioautorizado, paisesdeUE, regioncomun, todoslospaises
 } = require("./dao");
 const {hash, compare} = require("bcrypt");
-let arraydetodoslospaises = []
 
-todoslospaises().then(todoslospaises1=>{
-  for (let X of todoslospaises1.rows) {
-    arraydetodoslospaises.push(X)
-  }
-  console.log(arraydetodoslospaises)
-
-})
 dotenv.config()
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express',todoslospaises:arraydetodoslospaises});
+  let arraydetodoslospaises = []
 
+  todoslospaises().then(todoslospaises1=>{
+    for (let X of todoslospaises1.rows) {
+      arraydetodoslospaises.push(X)
+    }
+    console.log(arraydetodoslospaises)
+    res.render('index', { title: 'Express',todoslospaises:arraydetodoslospaises});
+
+  })
 });
 router.get('/datosgraficos', async function(req, res, next) {
   console.log("entra en datos graficos")
