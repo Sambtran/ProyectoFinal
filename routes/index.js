@@ -7,15 +7,23 @@ var express = require('express');
 const {log} = require("debug");
 var router = express.Router();
 const {georecogida, getusername, validarusuario, numeropaises,osRecogida,OSsimple, datosSOwversion, datosOSversion,
-  ponerenactivo, usuarioautorizado, paisesdeUE
+  ponerenactivo, usuarioautorizado, paisesdeUE, regioncomun, todoslospaises
 } = require("./dao");
 const {hash, compare} = require("bcrypt");
+let arraydetodoslospaises = []
 
+todoslospaises().then(todoslospaises1=>{
+  for (let X of todoslospaises1.rows) {
+    arraydetodoslospaises.push(X)
+  }
+  console.log(arraydetodoslospaises)
+
+})
 dotenv.config()
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Express',todoslospaises:arraydetodoslospaises});
 
 });
 router.get('/datosgraficos', async function(req, res, next) {
@@ -57,7 +65,30 @@ router.post('/paisesdeUE', async function(req, res, next) {
     }
   })
 });
-
+router.post('/regioncomun', async function(req, res, next) {
+  console.log("entra en datos graficos")
+  usuarioautorizado(req.body.token).then(async resi => {
+    if (resi == true) {
+      let resultado = await regioncomun(req.body.pais)
+      console.log(resultado)
+      res.send(resultado)
+    } else {
+      res.send(false)
+    }
+  })
+});
+router.post('/regioncomun', async function(req, res, next) {
+  console.log("entra en datos graficos")
+  usuarioautorizado(req.body.token).then(async resi => {
+    if (resi == true) {
+      let resultado = await regioncomun(req.body.pais)
+      console.log(resultado)
+      res.send(resultado)
+    } else {
+      res.send(false)
+    }
+  })
+});
 router.post("/login",(req, res)=>{
   let username = req.body.user
   let password = req.body.password.toString()

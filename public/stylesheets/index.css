@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
 *{
     padding: 0; margin: 0;
     box-sizing: border-box;
@@ -8,6 +9,16 @@ html{
 }
 body{
     height: 100%;
+}
+h1{
+    font-family: 'Abril Fatface', cursive; ;
+    text-align: center;
+}
+h1:first-letter{
+    color: orange;
+}
+#selectpais{
+    transform: translateY(0.5em);
 }
 main{
     display: grid;
@@ -35,6 +46,11 @@ nav{
     width: 100%;
     height: 7%;
 }
+nav div{
+    background-color: #00B7FF;
+    border-left: 10px solid red;
+    text-align: center;
+}
 body>section:nth-child(1),body>section:nth-child(2){
     display: flex;
     flex-flow: column;
@@ -53,6 +69,28 @@ body>section:nth-child(1),body>section:nth-child(2){
 }
 #customquery{
     grid-area: cq;
+}
+.volver-atras{
+    text-align: center;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+.volver-atras p{
+    padding: 1em 1.7em;
+    margin-bottom: 1em;
+    background-color: #474A59;
+    border-radius: 2em;
+    color: mediumpurple;
+    font-weight: bold;
+    font-size: 1.2em;
+    transition: all 0.4s ease-in-out;
+    user-select: none;
+}
+
+.volver-atras p:hover{
+    background-color:mediumpurple  ;
+    color: #474A59;
 }
 #loged{
     display: grid;

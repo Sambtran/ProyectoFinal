@@ -9,9 +9,19 @@ let section1 = document.getElementById("seccion1")
 const nav = document.getElementsByTagName("nav")[0]
     var login = document.getElementById("login")
     let loginanonimo = document.getElementById("loginanonimo")
+    let volver=document.getElementsByClassName("volver-atras")[0]
+    console.log(volver)
+    $(volver).bind("click",()=>{
+        body.style.gridTemplateColumns="1fr 1fr 0fr 0fr"
+        $("#loged").hide()
+        $("#loginanonimo").show()
+        $("#loginconuser").show()
+
+    })
     function invocation(){
-        Cookies.remove("user_id")
-        Cookies.remove("cookiesaccepted")
+        //Cookies.remove("user_id")
+        //Cookies.remove("cookiesaccepted")
+        $("#selectpais").hide()
         console.log(Cookies.get("user_id")+"  "+Cookies.get("cookiesaccepted"))
         if(true){
             fetch('https://api.ipify.org/').then(
@@ -195,10 +205,24 @@ $(nav).hide()
         invocation()
         $("#cookies").hide()
   })}
+    let navlogin = document.getElementById("navlogin")
+    $(navlogin).unbind("click")
+    $(navlogin).bind("click",()=>{
+        body.style.gridTemplateColumns="0fr 0fr 1fr 0fr"
+        $(".page").show()
+        $("#loged").show()
+        $("#contenido").hide()
+        $(nav).hide()
+        $("#tiposdegrafico").hide()
+        Cookies.set("user_id",null)
+        token = null
+        //DESCONEXION
+    })
 })
 var arraylienzos = []
 var seguro = 0
 function cargarusuario(token,tipo){
+    $("#selectpais").show()
     let lienzos = document.getElementsByClassName("lienzoOS")
     let geos = document.getElementsByClassName("lienzoGEO")
 
@@ -431,6 +455,57 @@ function cargarusuario(token,tipo){
             }}
         });
         arraylienzos.push(lienzo2geo)
+
+    })
+    $.post( "/regioncomun",{token:token,pais:$("selectorpais").value} ).done(resultado=>{
+        console.log(resultado)
+        let datosgraficos = resultado
+        let labels = []
+        let datainfo = []
+        let total = 0
+        for (let dato of datosgraficos) {
+            total += parseInt(dato.count)
+        }
+        for (let dato of datosgraficos) {
+            datainfo.push(parseInt(parseInt(dato.count)*100/total))
+        }
+        for (let dato of datosgraficos) {
+            labels.push(dato.region)
+        }
+        console.log(datosgraficos)
+        const ctx = $("#lienzeogeo3")
+        const data = {
+            labels:labels,
+            datasets: [{
+                label: ["Pais"],
+                data: datainfo,
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)',
+                    'rgb(101,255,83)',
+                    'rgba(39,40,44,0.39)',
+                    'rgb(0,255,177)',
+                    'rgb(135,148,77)',
+
+
+                ],
+                hoverOffset: 4
+            }]
+        };
+        let lienzo3geo=new Chart(ctx, {
+            type: tipo,
+            data: data,
+            options:{
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Regiones mas comunes del pais en %'
+
+                    }
+                }}
+        });
+        arraylienzos.push(lienzo3geo)
 
     })
 }

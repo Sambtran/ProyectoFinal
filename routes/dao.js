@@ -140,6 +140,15 @@ async function paisesdeUE(){
     return resultado.rows
 }
 
+async function regioncomun(pais="ES"){
+    let cliente = await crearCliente()
+    await cliente.connect()
+    let sql = `select region,count(*) from "Informacion".geodata where pais='${pais}' AND region is not null GROUP BY region ORDER BY count(*) desc`
+    let resultado =  await cliente.query(sql)
+    await cliente.end();
+    return resultado.rows
+}
+
 async function usuarioautorizado(token){
     let cliente = await crearCliente()
     await cliente.connect()
@@ -152,5 +161,13 @@ async function usuarioautorizado(token){
         false
     }
 }
+async function todoslospaises(){
+    let cliente = await crearCliente()
+    await cliente.connect()
+    let sql = `select Distinct pais from "Informacion".geodata `
+    let resultado =  await cliente.query(sql)
+    await cliente.end();
+    return resultado
+}
 
-module.exports = {paisesdeUE,usuarioautorizado,crearCliente,ponerenactivo,georecogida,getusername,validarusuario,numeropaises,osRecogida,OSsimple,datosOSversion}
+module.exports = {todoslospaises,regioncomun,paisesdeUE,usuarioautorizado,crearCliente,ponerenactivo,georecogida,getusername,validarusuario,numeropaises,osRecogida,OSsimple,datosOSversion}
