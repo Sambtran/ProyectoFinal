@@ -88,7 +88,7 @@ async function ponerenactivo(id){
 async function numeropaises(){
     let cliente = await crearCliente()
     await cliente.connect()
-    let sql = `select pais,count(*)  FROM "Informacion".geodata GROUP BY pais`
+    let sql = `select pais,count(*)  FROM "Informacion".geodata GROUP BY pais order by count(*) desc`
     let resultado =  await cliente.query(sql)
     await cliente.end();
     return resultado.rows
