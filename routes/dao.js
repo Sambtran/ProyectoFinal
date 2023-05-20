@@ -140,7 +140,7 @@ async function paisesdeUE(){
     return resultado.rows
 }
 
-async function regioncomun(pais="ES"){
+async function regioncomun(pais){
     let cliente = await crearCliente()
     await cliente.connect()
     let sql = `select region,count(*) from "Informacion".geodata where pais='${pais}' AND region is not null GROUP BY region ORDER BY count(*) desc`
@@ -155,10 +155,13 @@ async function usuarioautorizado(token){
     let sql = `SELECT "activo" from "Informacion".users where "password" like '%${token}%'`
     let resultado =  await cliente.query(sql)
     await cliente.end();
+    try {
     if(resultado.rows[0].activo==true){
         return true
     }else{
         false
+    }}catch (error){
+        return false
     }
 }
 async function todoslospaises(){

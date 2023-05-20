@@ -29,3 +29,7 @@ export function  mostrarnav(nav){
         nav.style.position="relative"
     },450)
 }
+export function esnodelist(nodes){
+    NodeList.prototype.isPrototypeOf(nodes)
+
+}
