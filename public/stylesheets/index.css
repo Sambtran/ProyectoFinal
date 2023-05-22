@@ -46,6 +46,13 @@ nav{
     width: 100%;
     height: 7%;
 }
+nav2{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+    width: 100%;
+    grid-area: n2;
+}
 nav div{
     background-color: #00B7FF;
     border-left: 10px solid red;
@@ -60,16 +67,13 @@ body>section:nth-child(1),body>section:nth-child(2){
 }
 
 #tiposdegrafico{
-    height: 98vh;
     background-color: lightgoldenrodyellow;
     display: flex;
     flex-flow: column wrap;
     justify-content: space-around;
     grid-area: nt;
 }
-#customquery{
-    grid-area: cq;
-}
+
 .volver-atras{
     text-align: center;
     display: flex;
@@ -98,11 +102,60 @@ body>section:nth-child(1),body>section:nth-child(2){
     grid-area: lg;
 }
 #contgeneral{
-    display: grid;
-    grid-template-areas:
-"nt lg"
-"nt lg";
 }
+#auxiliar2{
+    display: grid;
+    transition: all 1s ease;
+    height: 100%;
+}
+#historial{
+    background-color: red;
+}
+#customquery{
+    height: 100%;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-content: center;
+}
+#customquery button{
+    margin-top: 1em;
+    scale: 1.5;
+
+}
+#sentencia{
+    scale: 2.5;
+    margin-bottom: 2em;
+}
+select {
+    margin: 0 auto;
+    color: #EC6F66;
+    cursor: pointer;
+    padding: 0.3em;
+
+}
+
+select:hover {
+    background-color: transparent;
+    color: black;
+
+}
+
+select option {
+    background-color: white;
+    color: #51563c;
+    width: 310px;
+    padding: 10px 15px;
+    height: 20px;
+    cursor: pointer;
+}
+
+select option:hover {
+    padding-left: 25px;
+    width: 270px;
+    color: #EC6F66;
+}
+
 #OS>div,#geo>div{
 
 }
@@ -151,8 +204,9 @@ article#lienzocontainers{
 }
 
 #loged #OS,#loged #geo{
-    display: flex;
-    flex-flow: row wrap;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto;
 }
 #lienzocontainers>article{
 text-align: center}

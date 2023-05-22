@@ -1,159 +1,194 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/index.css' />
+    <link rel='stylesheet' href='/stylesheets/index.css'/>
     <script
             src="https://code.jquery.com/jquery-3.6.4.min.js"
             integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
             crossorigin="anonymous"></script>
-    <script type="module" src="/javascripts/index.js" ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.4/js.cookie.min.js" integrity="sha512-DF5DhxxAENLykNDZZmEAzK24nMCg7JvZ9Cqr+oFspKO4LZFC2CuSffwb+wlAJqVf3c3uHERBDGwvK1Wph7M5gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  </head>
-  <body>
-  <aside id="cookies">
+    <script type="module" src="/javascripts/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.4/js.cookie.min.js"
+            integrity="sha512-DF5DhxxAENLykNDZZmEAzK24nMCg7JvZ9Cqr+oFspKO4LZFC2CuSffwb+wlAJqVf3c3uHERBDGwvK1Wph7M5gg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"
+            integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/javascripts/customquery.js"></script>
+</head>
+<body>
+<aside id="cookies">
     <div class="containerx">
-      <p>Continuando en la web aceptas todos los terminos y condiciones junto con las cookies</p>
-      <a class="buttonx"style="--color:#1e9bff;">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        Continuar
-      </a>
+        <p>Continuando en la web aceptas todos los terminos y condiciones junto con las cookies</p>
+        <a class="buttonx" style="--color:#1e9bff;">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Continuar
+        </a>
     </div>
-  </aside>
-  <nav>
+</aside>
+<nav>
     <h1>KAFKA ANALYZER</h1>
     <div id="navlogin"><p>Entrada con usuario</p></div>
     <div id="info"><p>Mas información</p></div>
     <div id="Contacto"></div>
-  </nav>
-    <main>
+</nav>
+<main>
     <section>
-      <div id="loginanonimo"><!--<img src="/images/imagen-mapamundi.jpeg">--></div>
+        <div id="loginanonimo"><!--<img src="/images/imagen-mapamundi.jpeg">--></div>
     </section>
     <section>
-      <div id="loginconuser"><!--<img src="/images/imagen-usuario.jpg">--></div>
+        <div id="loginconuser"><!--<img src="/images/imagen-usuario.jpg">--></div>
     </section>
     <section id="contenido">
 
-      <article id="maincontenido">
-        <section>
-        <h2>Paises mas comunes</h2>
-        <canvas id="lienzo1"></canvas>
-        </section>
-        <section>
-          <h2>SO mas comunes</h2>
-          <canvas id="lienzo2"></canvas>
-        </section>
-      </article>
-    </section>
-
-      <article id="contgeneral">
-        <aside id="tiposdegrafico">
-          <div class="tiposdegrafico">
-            Lineal
-          </div>
-          <div class="tiposdegrafico">
-            donut
-          </div>
-          <div class="tiposdegrafico">
-            3D
-          </div>
-        </aside>
-        <div id="customquery" style="display: none">
-            <select>
-              <option></option>
-            </select>
-          <div>
-            <canvas class="" id=""></canvas>
-          </div>
-        </div>
-    <section id="loged">
-      <article id="lienzocontainers">
-      <aside class="page">
-        <div class="volver-atras"> <p> SALIR</p> </div>
-        <div class="container">
-          <div class="left">
-            <div class="login">Login</div>
-            <div class="eula"><p>Recordar en este navegador</p>
-              <input id="recordar" type="checkbox"></div>
-          </div>
-          <div class="right">
-            <svg viewBox="0 0 320 300">
-              <defs>
-                <linearGradient
-                        inkscape:collect="always"
-                        id="linearGradient"
-                        x1="13"
-                        y1="193.49992"
-                        x2="307"
-                        y2="193.49992"
-                        gradientUnits="userSpaceOnUse">
-                  <stop
-                          style="stop-color:#ff00ff;"
-                          offset="0"
-                          id="stop876" />
-                  <stop
-                          style="stop-color:#ff0000;"
-                          offset="1"
-                          id="stop878" />
-                </linearGradient>
-              </defs>
-              <path d="m 40,120.00016 239.99984,-3.2e-4 c 0,0 24.99263,0.79932 25.00016,35.00016 0.008,34.20084 -25.00016,35 -25.00016,35 h -239.99984 c 0,-0.0205 -25,4.01348 -25,38.5 0,34.48652 25,38.5 25,38.5 h 215 c 0,0 20,-0.99604 20,-25 0,-24.00396 -20,-25 -20,-25 h -190 c 0,0 -20,1.71033 -20,25 0,24.00396 20,25 20,25 h 168.57143" />
-            </svg>
-            <div class="form">
-              <label for="nickname">Nick</label>
-              <input type="text" id="nickname">
-              <label for="password">Password</label>
-              <input type="password" id="password">
-              <input type="submit" id="submit" value="Submit">
-            </div>
-          </div>
-        </div>
-      </aside>
-      <article id="contenedordegraficos">
-      <article id="geo">
-        <div>
-          <canvas class="lienzoGEO" id="lienzeogeo1"></canvas>
-        </div>
-        <div>
-
-          <canvas class="lienzoGEO" id="lienzeogeo2"></canvas>
-        </div>
-        <div>
-        <select id="selectpais">
-          <% for (let X of todoslospaises){
-                   %><%console.log("pais=  "+ X.pais)%> <option value= <%=X.pais%> > <%= X.pais %> </option> <%
-          } %>
-        </select>
-        <canvas class="lienzoGEO" id="lienzeogeo3"></canvas>
-        </div>
-        <div>
-        <canvas class="lienzoGEO" id="lienzeogeo4"></canvas>
-        </div>
-      </article></article>
-      <article>
-        <article id="OS">
-        <div>
-        <canvas class="lienzoOS" id="lienzoOS1"></canvas>
-        </div>
-        <div>
-        <canvas id="lienzoOS2" class="lienzoOS"></canvas>
-        </div>
-        <div>
-        <canvas id="lienzoOS3" class="lienzoOS"></canvas>
-        </div>
-        <div>
-        <canvas id="lienzoOS4" class="lienzoOS"></canvas>
-        </div>
+        <article id="maincontenido">
+            <section>
+                <h2>Paises mas comunes</h2>
+                <canvas id="lienzo1"></canvas>
+            </section>
+            <section>
+                <h2>SO mas comunes</h2>
+                <canvas id="lienzo2"></canvas>
+            </section>
         </article>
-      </article></article>
-    </section></article>
-    </main>
-  </body>
-  <script type="module" src="/javascripts/logins.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </section>
+    <article id="logedg">
+        <nav2 id="navusuario">
+            <div>Comunes</div>
+            <div>Custom query</div>
+            <div>Historial</div>
+        </nav2>
+        <article id="auxiliar2">
+            <article id="contgeneral">
+                <aside id="tiposdegrafico">
+                    <div class="tiposdegrafico">
+                        Lineal
+                    </div>
+                    <div class="tiposdegrafico">
+                        donut
+                    </div>
+                    <div class="tiposdegrafico">
+                        3D
+                    </div>
+                </aside>
+                <section id="loged">
+                    <article id="lienzocontainers">
+                        <aside class="page">
+                            <div class="volver-atras"><p> SALIR</p></div>
+                            <div class="container">
+                                <div class="left">
+                                    <div class="login">Login</div>
+                                    <div class="eula"><p>Recordar en este navegador</p>
+                                        <input id="recordar" type="checkbox"></div>
+                                </div>
+                                <div class="right">
+                                    <svg viewBox="0 0 320 300">
+                                        <defs>
+                                            <linearGradient
+                                                    inkscape:collect="always"
+                                                    id="linearGradient"
+                                                    x1="13"
+                                                    y1="193.49992"
+                                                    x2="307"
+                                                    y2="193.49992"
+                                                    gradientUnits="userSpaceOnUse">
+                                                <stop
+                                                        style="stop-color:#ff00ff;"
+                                                        offset="0"
+                                                        id="stop876"/>
+                                                <stop
+                                                        style="stop-color:#ff0000;"
+                                                        offset="1"
+                                                        id="stop878"/>
+                                            </linearGradient>
+                                        </defs>
+                                        <path d="m 40,120.00016 239.99984,-3.2e-4 c 0,0 24.99263,0.79932 25.00016,35.00016 0.008,34.20084 -25.00016,35 -25.00016,35 h -239.99984 c 0,-0.0205 -25,4.01348 -25,38.5 0,34.48652 25,38.5 25,38.5 h 215 c 0,0 20,-0.99604 20,-25 0,-24.00396 -20,-25 -20,-25 h -190 c 0,0 -20,1.71033 -20,25 0,24.00396 20,25 20,25 h 168.57143"/>
+                                    </svg>
+                                    <div class="form">
+                                        <label for="nickname">Nick</label>
+                                        <input type="text" id="nickname">
+                                        <label for="password">Password</label>
+                                        <input type="password" id="password">
+                                        <input type="submit" id="submit" value="Submit">
+                                    </div>
+                                </div>
+                            </div>
+                        </aside>
+                        <article id="contenedordegraficos">
+                            <article id="geo">
+                                <div>
+                                    <canvas class="lienzoGEO" id="lienzeogeo1"></canvas>
+                                </div>
+                                <div>
+
+                                    <canvas class="lienzoGEO" id="lienzeogeo2"></canvas>
+                                </div>
+                                <div id="selectpaisdiv">
+                                    <select id="selectpais">
+                                        <% for (let X of todoslospaises){
+                                        %>
+                                            <% console.log("pais=  " + X.pais) %>
+                                            <option value= <%= X.pais %>> <%= X.pais %> </option>
+                                        <%
+                                        } %>
+                                    </select>
+                                    <canvas class="lienzoGEO" id="lienzeogeo3"></canvas>
+                                </div>
+                                <div>
+                                    <canvas class="lienzoGEO" id="lienzeogeo4"></canvas>
+                                </div>
+                            </article>
+                        </article>
+                        <article>
+                            <article id="OS">
+                                <div>
+                                    <canvas class="lienzoOS" id="lienzoOS1"></canvas>
+                                </div>
+                                <div>
+                                    <canvas id="lienzoOS2" class="lienzoOS"></canvas>
+                                </div>
+                                <div>
+                                    <canvas id="lienzoOS3" class="lienzoOS"></canvas>
+                                </div>
+                                <div>
+                                    <canvas id="lienzoOS4" class="lienzoOS"></canvas>
+                                </div>
+                            </article>
+                        </article>
+                    </article>
+                </section>
+            </article>
+            <article id="customquery">
+                <div id="sentencia">
+                    <select id="valor1">
+                        <option value=""> </option>
+                        <option value="ciudad">
+                            ciudades
+                        </option>
+                        <option value="pais" class="casilladeseleccion">paises</option>
+                    </select>
+                    <select id="valor2" class="casilladeseleccion">
+                        <option value="mas">
+                            Mas Comunes
+                        </option>
+                        <option id="menos">
+                            Menos Comunes
+                        </option>
+                    </select>
+                    <select id="valor3" class="casilladeseleccion">
+                    </select>
+                </div>
+                <button id="ejecutar">Ejectuar</button>
+            </article>
+            <article id="historial">
+            </article>
+        </article>
+    </article>
+</main>
+</body>
+<script type="module" src="/javascripts/logins.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </html>

@@ -25,8 +25,15 @@ dotenv.config()
 router.get('/', function(req, res, next) {
   todoslospaises().then(todoslospaises1=>{
     for (let X of todoslospaises1.rows) {
-      arraydetodoslospaises.push(X)
-    }
+      let seguro
+      for (let x of arraydetodoslospaises) {
+        if(X.pais==x.pais){
+          seguro=true
+        }
+      }
+      if(seguro!=true){
+      arraydetodoslospaises.push(X)}
+    }})
   res.render('index', { title: 'Express',todoslospaises:arraydetodoslospaises});
 
 });
@@ -73,7 +80,9 @@ router.post('/regioncomun', async function(req, res, next) {
   console.log("entra en datos graficos")
   usuarioautorizado(req.body.token).then(async resi => {
     if (resi == true) {
-      let resultado = await regioncomun(req.body.pais)
+      let pais = req.body.pais
+      pais = pais.replaceAll(' ','')
+      let resultado = await regioncomun(pais)
       console.log(resultado)
       res.send(resultado)
     } else {
@@ -131,5 +140,9 @@ router.post("/georecogida",(req, res)=>{
     osRecogida(ip,osName,osBits,osVersion)
 
 })
-
+router.get('/todoslospaises', async function(req, res, next) {
+  todoslospaises().then(resultado=>{
+    res.send(resultado.rows)
+  })
+});
 module.exports = router;
