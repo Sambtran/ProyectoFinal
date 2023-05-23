@@ -7,7 +7,7 @@ var express = require('express');
 const {log} = require("debug");
 var router = express.Router();
 const {georecogida, getusername, validarusuario, numeropaises,osRecogida,OSsimple, datosSOwversion, datosOSversion,
-  ponerenactivo, usuarioautorizado, paisesdeUE, regioncomun, todoslospaises
+  ponerenactivo, usuarioautorizado, paisesdeUE, regioncomun, todoslospaises, regiondepais
 } = require("./dao");
 const {hash, compare} = require("bcrypt");
 let arraydetodoslospaises = []
@@ -76,6 +76,15 @@ router.post('/paisesdeUE', async function(req, res, next) {
     }
   })
 });
+router.get('/customquery', async function(req, res, next) {
+  usuarioautorizado(req.body.token).then(async resi => {
+    if (resi == true) {
+      customquery(req.body.valores)
+    } else {
+      res.send(false)
+    }
+  })
+});
 router.post('/regioncomun', async function(req, res, next) {
   console.log("entra en datos graficos")
   usuarioautorizado(req.body.token).then(async resi => {
@@ -90,18 +99,7 @@ router.post('/regioncomun', async function(req, res, next) {
     }
   })
 });
-router.post('/regioncomun', async function(req, res, next) {
-  console.log("entra en datos graficos")
-  usuarioautorizado(req.body.token).then(async resi => {
-    if (resi == true) {
-      let resultado = await regioncomun(req.body.pais)
-      console.log(resultado)
-      res.send(resultado)
-    } else {
-      res.send(false)
-    }
-  })
-});
+
 router.post("/login",(req, res)=>{
   let username = req.body.user
   let password = req.body.password.toString()
@@ -143,6 +141,12 @@ router.post("/georecogida",(req, res)=>{
 router.get('/todoslospaises', async function(req, res, next) {
   todoslospaises().then(resultado=>{
     res.send(resultado.rows)
+  })
+});
+
+router.post('/regiondepais', async function(req, res, next) {
+  regiondepais(req.body.pais).then(resultado=>{
+    res.send(resultado)
   })
 });
 module.exports = router;

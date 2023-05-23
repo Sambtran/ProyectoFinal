@@ -25,6 +25,11 @@ const bcrypt = require("bcrypt");
     }else{
         var region = datos.region
     }
+      if(datos.city==""){
+          var city = null
+      }else{
+          var city = datos.city
+      }
     //Si se encuentra en la union europea
     if(datos.eu==1){
         var eu=true
@@ -41,7 +46,7 @@ const bcrypt = require("bcrypt");
     console.log(fecha)
     try {
         if(token!=undefined){}else{token=null}
-        let sql = `insert into "Informacion".geodata (rowid, ip, user_id, pais, region, eu, zonahoraria, latitud, longitud, metrocode, fallo,date) values (default,'${ip}',${token},'${pais}','${region}',${eu},'${zonahoraria}',${latitud},${longitud},${metrocode},${fallo},'${fecha}');`
+        let sql = `insert into "Informacion".geodata (rowid, ip, user_id, pais, region, eu, zonahoraria, latitud, longitud, metrocode,fallo,date,city) values (default,'${ip}',${token},'${pais}','${region}',${eu},'${zonahoraria}',${latitud},${longitud},${metrocode},${fallo},'${fecha}','${city}');`
         const res = await cliente.query(sql)
         return true
     }catch (error){
@@ -148,6 +153,14 @@ async function regioncomun(pais){
     await cliente.end();
     return resultado.rows
 }
+async function regiondepais(pais){
+    let cliente = await crearCliente()
+    await cliente.connect()
+    let sql = `select region from "Informacion".geodata where pais like '%${pais}%' and geodata.region notnull group by region `
+    let resultado =  await cliente.query(sql)
+    await cliente.end();
+    return resultado.rows
+}
 
 async function usuarioautorizado(token){
     let cliente = await crearCliente()
@@ -172,5 +185,21 @@ async function todoslospaises(){
     await cliente.end();
     return resultado
 }
+async function customquery(valores){
+    let sql
+     if(valores[0]=="os"){
+         if(valores[2]=="mundo"){
 
-module.exports = {todoslospaises,regioncomun,paisesdeUE,usuarioautorizado,crearCliente,ponerenactivo,georecogida,getusername,validarusuario,numeropaises,osRecogida,OSsimple,datosOSversion}
+         }else{
+             sql='SELECT'
+         }
+     }
+    let cliente = await crearCliente()
+    await cliente.connect()
+
+    let resultado =  await cliente.query(sql)
+    await cliente.end();
+    return resultado
+}
+
+module.exports = {regiondepais,todoslospaises,regioncomun,paisesdeUE,usuarioautorizado,ponerenactivo,georecogida,getusername,validarusuario,numeropaises,osRecogida,OSsimple,datosOSversion}

@@ -106,7 +106,11 @@ const nav = document.getElementsByTagName("nav")[0]
                             backgroundColor: [
                                 'rgb(255, 99, 132)',
                                 'rgb(54, 162, 235)',
-                                'rgb(255, 205, 86)'
+                                'rgb(255, 205, 86)',
+                                'rgb(24,26,100)',
+                                'rgb(156,206,68)',
+                                'rgb(165,176,149)',
+
                             ],
                             hoverOffset: 4
                         }]
@@ -144,9 +148,12 @@ const nav = document.getElementsByTagName("nav")[0]
                             label: ["OS"],
                             data: datainfo,
                             backgroundColor: [
-                                'rgb(123,147,250)',
-                                'rgb(252,105,105)',
-                                'rgb(108,108,108)'
+                                'rgb(255, 99, 132)',
+                                'rgb(54, 162, 235)',
+                                'rgb(255, 205, 86)',
+                                'rgb(24,26,100)',
+                                'rgb(156,206,68)',
+                                'rgb(165,176,149)',
                             ],
                             hoverOffset: 4
                         }]
