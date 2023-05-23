@@ -5,91 +5,57 @@ document.addEventListener("DOMContentLoaded",()=>{
     let valor2 = document.getElementById("valor2")
     let valor3 = document.getElementById("valor3")
     let ejecutar = document.getElementById("ejecutar")
+    let container = document.getElementById("container")
     $("#customquery").hide()
     $("#historial").hide()
     $("#navusuario")
-
-    valor1.addEventListener("change",()=>{
-    if(valor1.value.replaceAll(' ','')=="pais"){
-        while(valor3.firstChild){
-            valor3.removeChild(valor3.firstChild)
-        }
-        let elemento1 =  document.createElement("option")
-        elemento1.setAttribute("value","mundo")
-        elemento1.innerText="Mundo"
-        let elemento2 =  document.createElement("option")
-        elemento2.setAttribute("value","ue")
-        elemento2.innerText="Union europea"
-        valor3.appendChild(elemento1)
-        valor3.appendChild(elemento2)
-    }
-    if(valor1.value.replaceAll(' ','')=="ciudad"){
-        while(valor3.firstChild){
-            valor3.removeChild(valor3.firstChild)
-        }
-        $.get("/todoslospaises").then(resultado=>{
-            console.log(resultado)
-            let arrayoptions=[]
-            for (let x of resultado) {
-               let elemento =  document.createElement("option")
-                elemento.setAttribute("value",x.pais)
-                elemento.innerText=x.pais
-                valor3.appendChild(elemento)
-            }
-        })
-    }
-        if(valor1.value.replaceAll(' ','')=="os"){
-            while(valor3.firstChild){
-                valor3.removeChild(valor3.firstChild)
-            }
-            $.get("/todoslospaises").then(resultado=>{
-                console.log(resultado)
-                let arrayoptions=[]
-                for (let x of resultado) {
-                    let elemento =  document.createElement("option")
-                    elemento.setAttribute("value",x.pais)
-                    elemento.innerText=x.pais
-                    valor3.appendChild(elemento)
-                }
-            })
-        }
-})
-    valor3.addEventListener("change",()=>{
-        if(valor1.value.replaceAll(' ','')=="os"){
-            $.post("/regiondepais",{pais:valor3.value.replaceAll(' ','')}).then(resultado=>{
-                if(resultado.length>0){
-                    let nuevo = document.createElement("select")
-                    let blanco = document.createElement("option")
-                    blanco.setAttribute("val",' ')
-                    blanco.innerText=" "
-                    nuevo.appendChild(blanco)
-                    for (let region of resultado) {
-                        let regionc = region.region
-                        let selecteable = document.createElement("option")
-                        selecteable.setAttribute("value",regionc)
-                        selecteable.innerText=regionc
-                        nuevo.appendChild(selecteable)
-                    }
-                    nuevo.setAttribute("id","soreg")
-                    try {
-                        $("#soreg").remove()
-                    }catch (error){}
-                    sentencia.appendChild(nuevo)
-                }})}
-        })
-
     ejecutar.addEventListener("click",()=>{
-        let valores = []
-        let palabras = sentencia.childNodes
-        for (const palabra of palabras) {
-            valores.push(palabra.value.replaceAll(' ',''))
-        }
-        $.get("/customquery",{toke:token,valores:valores}).then(res=>{
+        console.log("yey")
+        console.log($("#sentencia").val())
+        $.post("/customquery",{sentencia:$("#sentencia").val()}).then(res=>{
+            if($("#excepcion").is(":checked")||true){
+                // Create the table element
+                let table = document.createElement("table");
 
+                // Get the keys (column names) of the first object in the JSON data
+                let cols = Object.keys(res[0]);
+
+                // Create the header element
+                let thead = document.createElement("thead");
+                thead.setAttribute("class","tbl-header")
+                let tr = document.createElement("tr");
+
+                // Loop through the column names and create header cells
+                cols.forEach((item) => {
+                    let th = document.createElement("th");
+                    th.innerText = item; // Set the column name as the text of the header cell
+                    tr.appendChild(th); // Append the header cell to the header row
+                });
+                thead.appendChild(tr); // Append the header row to the header
+                table.append(tr) // Append the header to the table
+
+                // Loop through the JSON data and create table rows
+                res.forEach((item) => {
+                    let tr = document.createElement("tr");
+
+                    // Get the values of the current object in the JSON data
+                    let vals = Object.values(item);
+
+                    // Loop through the values and create table cells
+                    vals.forEach((elem) => {
+                        let td = document.createElement("td");
+                        td.innerText = elem; // Set the value as the text of the table cell
+                        tr.appendChild(td); // Append the table cell to the table row
+                    });
+                    table.appendChild(tr); // Append the table row to the table
+                });
+                table.setAttribute("class","tbl-content")
+                container.appendChild(table)
+            }else{
+
+            }
+            console.log(res)
         })
     })
-
-
-
-
 })
+

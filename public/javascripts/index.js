@@ -3,6 +3,7 @@ var lienzo3geo;
 var tipo = "doughnut"
 import {esnodelist, mostrarnav} from "./helper.js";
 var token
+
 document.addEventListener("DOMContentLoaded",()=>{
 $("#loged").hide();
 $("#logedg").hide()
@@ -13,11 +14,23 @@ const nav = document.getElementsByTagName("nav")[0]
     var login = document.getElementById("login")
     let loginanonimo = document.getElementById("loginanonimo")
     let volver=document.getElementsByClassName("volver-atras")[0]
+    let volveran=document.getElementsByClassName("volver-atras-an")[0]
+
     console.log(volver)
     $(volver).bind("click",()=>{
         body.style.gridTemplateColumns="1fr 1fr 0fr 0fr"
         $("#loged").hide()
         $("#logedg").hide()
+        $("#loginanonimo").show()
+        $("#loginconuser").show()
+
+    })
+    $(volveran).bind("click",()=>{
+        body.style.gridTemplateColumns="1fr 1fr 0fr 0fr"
+        $("#loged").hide()
+        $("#logedg").hide()
+        $("#contenido").hide()
+        $("nav").hide()
         $("#loginanonimo").show()
         $("#loginconuser").show()
 
@@ -233,7 +246,6 @@ $(nav).hide()
         $(nav).hide()
         $("#tiposdegrafico").hide()
         Cookies.set("user_id",null)
-        token = null
         //DESCONEXION
     })
     $("#selectpais").bind("change",()=>{

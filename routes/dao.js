@@ -185,21 +185,13 @@ async function todoslospaises(){
     await cliente.end();
     return resultado
 }
-async function customquery(valores){
-    let sql
-     if(valores[0]=="os"){
-         if(valores[2]=="mundo"){
-
-         }else{
-             sql='SELECT'
-         }
-     }
+async function customqueryE(textosql){
     let cliente = await crearCliente()
     await cliente.connect()
-
+    let sql = `Select ${textosql} `
     let resultado =  await cliente.query(sql)
     await cliente.end();
     return resultado
 }
 
-module.exports = {regiondepais,todoslospaises,regioncomun,paisesdeUE,usuarioautorizado,ponerenactivo,georecogida,getusername,validarusuario,numeropaises,osRecogida,OSsimple,datosOSversion}
+module.exports = {customqueryE,regiondepais,todoslospaises,regioncomun,paisesdeUE,usuarioautorizado,ponerenactivo,georecogida,getusername,validarusuario,numeropaises,osRecogida,OSsimple,datosOSversion}
