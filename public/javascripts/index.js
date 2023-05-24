@@ -13,8 +13,8 @@ let section1 = document.getElementById("seccion1")
 const nav = document.getElementsByTagName("nav")[0]
     var login = document.getElementById("login")
     let loginanonimo = document.getElementById("loginanonimo")
-    let volver=document.getElementsByClassName("volver-atras")[0]
-    let volveran=document.getElementsByClassName("volver-atras-an")[0]
+    let volver=document.getElementsByClassName("volver-atrasp")[0]
+    let volveran=document.getElementsByClassName("volver-atras-anp")[0]
 
     console.log(volver)
     $(volver).bind("click",()=>{
