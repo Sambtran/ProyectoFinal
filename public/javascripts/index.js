@@ -3,6 +3,7 @@ var lienzo3geo;
 var tipo = "doughnut"
 import {esnodelist, mostrarnav} from "./helper.js";
 var token
+
 document.addEventListener("DOMContentLoaded",()=>{
 $("#loged").hide();
 $("#logedg").hide()
@@ -13,11 +14,23 @@ const nav = document.getElementsByTagName("nav")[0]
     var login = document.getElementById("login")
     let loginanonimo = document.getElementById("loginanonimo")
     let volver=document.getElementsByClassName("volver-atras")[0]
+    let volveran=document.getElementsByClassName("volver-atras-an")[0]
+
     console.log(volver)
     $(volver).bind("click",()=>{
         body.style.gridTemplateColumns="1fr 1fr 0fr 0fr"
         $("#loged").hide()
         $("#logedg").hide()
+        $("#loginanonimo").show()
+        $("#loginconuser").show()
+
+    })
+    $(volveran).bind("click",()=>{
+        body.style.gridTemplateColumns="1fr 1fr 0fr 0fr"
+        $("#loged").hide()
+        $("#logedg").hide()
+        $("#contenido").hide()
+        $("nav").hide()
         $("#loginanonimo").show()
         $("#loginconuser").show()
 
@@ -67,9 +80,6 @@ const nav = document.getElementsByTagName("nav")[0]
             $("#tiposdegrafico").fadeIn("slow")
             token = Cookies.get("user_id")
 
-
-
-
         }else{
             loginanonimo.addEventListener("click",async () => {
                 body.style.gridTemplateColumns = "0fr 0fr 1fr 0fr"
@@ -106,7 +116,11 @@ const nav = document.getElementsByTagName("nav")[0]
                             backgroundColor: [
                                 'rgb(255, 99, 132)',
                                 'rgb(54, 162, 235)',
-                                'rgb(255, 205, 86)'
+                                'rgb(255, 205, 86)',
+                                'rgb(24,26,100)',
+                                'rgb(156,206,68)',
+                                'rgb(165,176,149)',
+
                             ],
                             hoverOffset: 4
                         }]
@@ -144,9 +158,12 @@ const nav = document.getElementsByTagName("nav")[0]
                             label: ["OS"],
                             data: datainfo,
                             backgroundColor: [
-                                'rgb(123,147,250)',
-                                'rgb(252,105,105)',
-                                'rgb(108,108,108)'
+                                'rgb(255, 99, 132)',
+                                'rgb(54, 162, 235)',
+                                'rgb(255, 205, 86)',
+                                'rgb(24,26,100)',
+                                'rgb(156,206,68)',
+                                'rgb(165,176,149)',
                             ],
                             hoverOffset: 4
                         }]
@@ -161,6 +178,7 @@ const nav = document.getElementsByTagName("nav")[0]
             $("#loginconuser").bind("click touchstart",(ev)=>{
                 $("#loginconuser").fadeOut("slow")
                 $("#loginanonimo").fadeOut("slow")
+                $("#navusuario").hide()
                 setTimeout(()=>{
                 },400)
                 $("#loged").show()
@@ -226,12 +244,12 @@ $(nav).hide()
         $(nav).hide()
         $("#tiposdegrafico").hide()
         Cookies.set("user_id",null)
-        token = null
         //DESCONEXION
     })
     $("#selectpais").bind("change",()=>{
         console.log("hola")
-        lienzo3geo.destroy()
+        if(lienzo3geo!=null && lienzo3geo!=undefined){
+        lienzo3geo.destroy()}
         $.post( "/regioncomun",{token:token,pais:$("#selectpais option:selected").text()} ).done(resultado=>{
             console.log(resultado)
             let datosgraficos = resultado
@@ -290,6 +308,7 @@ var seguro = 0
 function cargarusuario(token,tipo){
     let auxiliar2 = document.getElementById("auxiliar2")
     let navuser = document.getElementById("navusuario")
+    $(navuser).show()
     let hijosnavuser = navuser.childNodes
     let Z=0
     for (let j = 0; j < hijosnavuser.length ; j++) {

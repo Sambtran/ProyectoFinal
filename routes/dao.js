@@ -2,7 +2,6 @@ const {Client} = require("pg");
 const {query} = require("postgre");
 const {log} = require("debug");
 const bcrypt = require("bcrypt");
-
  async function crearCliente(){
     let cliente = new Client({
         user: "alberto",
@@ -25,6 +24,11 @@ const bcrypt = require("bcrypt");
     }else{
         var region = datos.region
     }
+      if(datos.city==""){
+          var city = null
+      }else{
+          var city = datos.city
+      }
     //Si se encuentra en la union europea
     if(datos.eu==1){
         var eu=true
@@ -37,11 +41,12 @@ const bcrypt = require("bcrypt");
     let metrocode = datos.metro
     let fallo = datos.area
     let fecha = new Date()
-    fecha = fecha.toLocaleDateString() + " " + fecha.toLocaleTimeString();
+    fecha = convertDate(fecha)
+
     console.log(fecha)
     try {
         if(token!=undefined){}else{token=null}
-        let sql = `insert into "Informacion".geodata (rowid, ip, user_id, pais, region, eu, zonahoraria, latitud, longitud, metrocode, fallo,date) values (default,'${ip}',${token},'${pais}','${region}',${eu},'${zonahoraria}',${latitud},${longitud},${metrocode},${fallo},'${fecha}');`
+        let sql = `insert into "Informacion".geodata (rowid, ip, user_id, pais, region, eu, zonahoraria, latitud, longitud, metrocode,fallo,date,city) values (default,'${ip}',${token},'${pais}','${region}',${eu},'${zonahoraria}',${latitud},${longitud},${metrocode},${fallo},default,'${city}');`
         const res = await cliente.query(sql)
         return true
     }catch (error){
@@ -148,6 +153,14 @@ async function regioncomun(pais){
     await cliente.end();
     return resultado.rows
 }
+async function regiondepais(pais){
+    let cliente = await crearCliente()
+    await cliente.connect()
+    let sql = `select region from "Informacion".geodata where pais like '%${pais}%' and geodata.region notnull group by region `
+    let resultado =  await cliente.query(sql)
+    await cliente.end();
+    return resultado
+}
 
 async function usuarioautorizado(token){
     let cliente = await crearCliente()
@@ -172,5 +185,13 @@ async function todoslospaises(){
     await cliente.end();
     return resultado
 }
+async function customqueryE(textosql){
+    let cliente = await crearCliente()
+    await cliente.connect()
+    let sql = `Select ${textosql} `
+    let resultado =  await cliente.query(sql)
+    await cliente.end();
+    return resultado
+}
 
-module.exports = {todoslospaises,regioncomun,paisesdeUE,usuarioautorizado,crearCliente,ponerenactivo,georecogida,getusername,validarusuario,numeropaises,osRecogida,OSsimple,datosOSversion}
+module.exports = {customqueryE,regiondepais,todoslospaises,regioncomun,paisesdeUE,usuarioautorizado,ponerenactivo,georecogida,getusername,validarusuario,numeropaises,osRecogida,OSsimple,datosOSversion}

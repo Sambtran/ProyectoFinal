@@ -15,6 +15,7 @@
             integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/javascripts/customquery.js"></script>
+    <script src="/stylesheets/tabla.css"></script>
 </head>
 <body>
 <aside id="cookies">
@@ -31,19 +32,30 @@
 </aside>
 <nav>
     <h1>KAFKA ANALYZER</h1>
-    <div id="navlogin"><p>Entrada con usuario</p></div>
-    <div id="info"><p>Mas información</p></div>
-    <div id="Contacto"></div>
 </nav>
 <main>
     <section>
-        <div id="loginanonimo"><!--<img src="/images/imagen-mapamundi.jpeg">--></div>
+
+        <div id="loginanonimo"><!--<img src="/images/imagen-mapamundi.jpeg">-->   <div>
+                <div class="supratit"><p id="tit">Login ANONIMO</p></div>
+
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+            </div></div>
     </section>
     <section>
-        <div id="loginconuser"><!--<img src="/images/imagen-usuario.jpg">--></div>
+        <div id="loginconuser"><!--<img src="/images/imagen-usuario.jpg">-->   <div>
+              <div class="supratit"><p id="tit">Login USER</p></div>
+
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+            </div></div>
     </section>
     <section id="contenido">
-
+        <div class="volver-atras-an"><p> SALIR</p></div>
+        <div id="subcontenido">
         <article id="maincontenido">
             <section>
                 <h2>Paises mas comunes</h2>
@@ -53,7 +65,7 @@
                 <h2>SO mas comunes</h2>
                 <canvas id="lienzo2"></canvas>
             </section>
-        </article>
+        </article></div>
     </section>
     <article id="logedg">
         <nav2 id="navusuario">
@@ -162,26 +174,9 @@
                 </section>
             </article>
             <article id="customquery">
-                <div id="sentencia">
-                    <select id="valor1">
-                        <option value=""> </option>
-                        <option value="ciudad">
-                            ciudades
-                        </option>
-                        <option value="pais" class="casilladeseleccion">paises</option>
-                    </select>
-                    <select id="valor2" class="casilladeseleccion">
-                        <option value="mas">
-                            Mas Comunes
-                        </option>
-                        <option id="menos">
-                            Menos Comunes
-                        </option>
-                    </select>
-                    <select id="valor3" class="casilladeseleccion">
-                    </select>
-                </div>
+                <input id="sentencia" type="text">
                 <button id="ejecutar">Ejectuar</button>
+                <div id="container"></div>
             </article>
             <article id="historial">
             </article>
