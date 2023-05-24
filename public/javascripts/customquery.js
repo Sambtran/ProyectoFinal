@@ -1,4 +1,5 @@
 
+
 document.addEventListener("DOMContentLoaded",()=>{
     let sentencia = document.getElementById("sentencia")
     let valor1 = document.getElementById("valor1")
@@ -10,9 +11,22 @@ document.addEventListener("DOMContentLoaded",()=>{
     $("#historial").hide()
     $("#navusuario")
     ejecutar.addEventListener("click",()=>{
+        var historial = Cookies.get("historial")
+        let auxiliar=[]
+        try {
+            historial=JSON.parse(historial)
+            for (let X of historial) {
+                auxiliar.push(X)
+            }
+            console.log(auxiliar)
+        }catch (error){
+            console.log(error)
+        }
         console.log("yey")
-        console.log($("#sentencia").val())
         $.post("/customquery",{sentencia:$("#sentencia").val()}).then(res=>{
+            auxiliar.push($("#sentencia").val())
+            auxiliar=JSON.stringify(auxiliar)
+            Cookies.set("historial",auxiliar)
             if($("#excepcion").is(":checked")||true){
                 // Create the table element
                 let table = document.createElement("table");
@@ -55,8 +69,10 @@ document.addEventListener("DOMContentLoaded",()=>{
             }else{
 
             }
+
             console.log(res)
         })
+
     })
 })
 

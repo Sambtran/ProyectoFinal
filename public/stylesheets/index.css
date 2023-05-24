@@ -122,7 +122,20 @@ body>section:nth-child(1),body>section:nth-child(2){
     user-select: none;
 }
 
-.volver-atras p:hover,.volver-atras-an p:hover{
+.historialel{
+    height: 5em;
+    text-align: center;
+    margin-top: 1em;
+    background-color: #474A59;
+    color: mediumpurple;
+    font-weight: bold;
+    transition: all 0.4s ease-in-out;
+    user-select: none;
+}
+.historialel p{
+    padding: 1em;
+}
+.volver-atras p:hover,.volver-atras-an p:hover,.historialel p:hover{
     background-color:mediumpurple  ;
     color: #474A59;
 }
@@ -147,7 +160,9 @@ body>section:nth-child(1),body>section:nth-child(2){
     height: 100%;
 }
 #historial{
-    background-color: red;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
 }
 #customquery{
     height: 100%;

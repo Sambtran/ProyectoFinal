@@ -337,6 +337,18 @@ function cargarusuario(token,tipo){
                 $("#customquery").hide()
                 $("#historial").show()
                 $("#contgeneral").hide()
+                let historial = Cookies.get("historial")
+                historial = JSON.parse(historial)
+                let containerhistorial = document.getElementById("historial")
+                for (let x of historial) {
+                    let nuevo = document.createElement("div")
+                    nuevo.setAttribute("class","historialel")
+                    let nuevop=document.createElement("p")
+                    nuevop.innerText=x
+                    nuevo.appendChild(nuevop)
+                    containerhistorial.appendChild(nuevo)
+                    
+                }
             })
         }Z++}
     }
