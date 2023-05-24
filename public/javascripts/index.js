@@ -80,9 +80,6 @@ const nav = document.getElementsByTagName("nav")[0]
             $("#tiposdegrafico").fadeIn("slow")
             token = Cookies.get("user_id")
 
-
-
-
         }else{
             loginanonimo.addEventListener("click",async () => {
                 body.style.gridTemplateColumns = "0fr 0fr 1fr 0fr"
@@ -181,6 +178,7 @@ const nav = document.getElementsByTagName("nav")[0]
             $("#loginconuser").bind("click touchstart",(ev)=>{
                 $("#loginconuser").fadeOut("slow")
                 $("#loginanonimo").fadeOut("slow")
+                $("#navusuario").hide()
                 setTimeout(()=>{
                 },400)
                 $("#loged").show()
@@ -250,7 +248,8 @@ $(nav).hide()
     })
     $("#selectpais").bind("change",()=>{
         console.log("hola")
-        lienzo3geo.destroy()
+        if(lienzo3geo!=null && lienzo3geo!=undefined){
+        lienzo3geo.destroy()}
         $.post( "/regioncomun",{token:token,pais:$("#selectpais option:selected").text()} ).done(resultado=>{
             console.log(resultado)
             let datosgraficos = resultado
@@ -309,6 +308,7 @@ var seguro = 0
 function cargarusuario(token,tipo){
     let auxiliar2 = document.getElementById("auxiliar2")
     let navuser = document.getElementById("navusuario")
+    $(navuser).show()
     let hijosnavuser = navuser.childNodes
     let Z=0
     for (let j = 0; j < hijosnavuser.length ; j++) {

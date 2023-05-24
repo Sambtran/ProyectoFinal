@@ -106,14 +106,17 @@ router.post('/customquery', async function (req, res, next) {
 router.post('/regioncomun', async function (req, res, next) {
     console.log("entra en datos graficos")
     usuarioautorizado(req.body.token).then(async resi => {
+        try {
         if (resi == true) {
             let pais = req.body.pais
-            pais = pais.replaceAll(' ', '')
+            pais = pais.replaceAll(' ','')
             let resultado = await regioncomun(pais)
             console.log(resultado)
-            res.send(resultado)
+            res.send(resultado.rows)
         } else {
             res.send(false)
+        }}catch (error){
+            console.log(error)
         }
     })
 });
