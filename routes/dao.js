@@ -40,10 +40,7 @@ const bcrypt = require("bcrypt");
     let longitud = datos.ll[1]
     let metrocode = datos.metro
     let fallo = datos.area
-    let fecha = new Date()
-    fecha = convertDate(fecha)
 
-    console.log(fecha)
     try {
         if(token!=undefined){}else{token=null}
         let sql = `insert into "Informacion".geodata (rowid, ip, user_id, pais, region, eu, zonahoraria, latitud, longitud, metrocode,fallo,date,city) values (default,'${ip}',${token},'${pais}','${region}',${eu},'${zonahoraria}',${latitud},${longitud},${metrocode},${fallo},default,'${city}');`
@@ -131,7 +128,7 @@ async function OSsimple(){
 async function datosOSversion(){
     let cliente = await crearCliente()
     await cliente.connect()
-    let sql = `select "osVersion",count(*) from "Informacion".os where "osName" like '%Windows%' group by "osVersion"`
+    let sql = `select "osVersion",count(*) from "Informacion".os where "osName" like '%Windows%' and "osVersion" IS NOT NULL group by "osVersion"`
     let resultado =  await cliente.query(sql)
     await cliente.end();
     return resultado.rows

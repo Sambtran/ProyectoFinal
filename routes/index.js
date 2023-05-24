@@ -109,10 +109,10 @@ router.post('/regioncomun', async function (req, res, next) {
         try {
         if (resi == true) {
             let pais = req.body.pais
-            pais = pais.replaceAll(' ','')
+            pais = pais.replace(/ /g,'')
             let resultado = await regioncomun(pais)
             console.log(resultado)
-            res.send(resultado.rows)
+            res.send(resultado)
         } else {
             res.send(false)
         }}catch (error){

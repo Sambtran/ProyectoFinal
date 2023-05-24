@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded",()=>{
                     table.appendChild(tr); // Append the table row to the table
                 });
                 table.setAttribute("class","tbl-content")
+                container.innerHTML=''
                 container.appendChild(table)
             }else{
 
