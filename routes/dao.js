@@ -16,6 +16,7 @@ const bcrypt = require("bcrypt");
 }
 
   async function georecogida (datos,ip,token){
+      console.log(token)
     let cliente = await crearCliente()
     await cliente.connect()
     let pais = datos.country
