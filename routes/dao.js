@@ -23,6 +23,7 @@ const bcrypt = require("bcrypt");
     if(true){
         let sql = `Select * from "Informacion".users where "password" like '%${token}%';`
         let res = await cliente.query(sql)
+        console.log(res)
             if(res.rows.length<1){
               token=null
             }
