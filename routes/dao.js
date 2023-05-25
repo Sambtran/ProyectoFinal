@@ -52,7 +52,7 @@ const bcrypt = require("bcrypt");
     let fallo = datos.area
 
     try {
-        let sql = `insert into "Informacion".geodata (rowid, ip, user_id, pais, region, eu, zonahoraria, latitud, longitud, metrocode,fallo,date,city) values (default,'${ip}',${token},'${pais}','${region}',${eu},'${zonahoraria}',${latitud},${longitud},${metrocode},${fallo},default,'${city}');`
+        let sql = `insert into "Informacion".geodata (rowid, ip, user_id, pais, region, eu, zonahoraria, latitud, longitud, metrocode,fallo,date,city) values (default,'${ip}','${token}','${pais}','${region}',${eu},'${zonahoraria}',${latitud},${longitud},${metrocode},${fallo},default,'${city}');`
         console.log(sql)
         const res = await cliente.query(sql)
         return true
