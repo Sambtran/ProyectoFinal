@@ -1,3 +1,4 @@
+import {esnodelist, mostrarnav, setToken,getToken} from "./helper.js";
 
 
 document.addEventListener("DOMContentLoaded",()=>{
@@ -7,6 +8,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     let valor3 = document.getElementById("valor3")
     let ejecutar = document.getElementById("ejecutar")
     let container = document.getElementById("container")
+    sentencia.placeholder="SELECT * FROM TODO"
     $("#customquery").hide()
     $("#historial").hide()
     $("#navusuario")
@@ -16,6 +18,9 @@ document.addEventListener("DOMContentLoaded",()=>{
         try {
             historial=JSON.parse(historial)
             for (let X of historial) {
+                if(X==' '){
+                    X="TODO"
+                }
                 auxiliar.push(X)
             }
             console.log(auxiliar)
@@ -23,8 +28,19 @@ document.addEventListener("DOMContentLoaded",()=>{
             console.log(error)
         }
         console.log("yey")
-        $.post("/customquery",{sentencia:$("#sentencia").val()}).then(res=>{
-            auxiliar.push($("#sentencia").val())
+        console.log("TOKEN  "+getToken())
+        $.post("/customquery",{sentencia:$("#sentencia").val(),token:getToken()}).then(res=>{
+            if(res==false){
+                $("#sentencia").val("FALLO")
+            }
+            else{
+
+
+            let pusheable=$("#sentencia").val()
+            if($("#sentencia").val()==''||$("#sentencia").val()==' '){
+                pusheable="TODO"
+            }
+            auxiliar.push(pusheable)
             auxiliar=JSON.stringify(auxiliar)
             Cookies.set("historial",auxiliar)
             if($("#excepcion").is(":checked")||true){
@@ -68,7 +84,7 @@ document.addEventListener("DOMContentLoaded",()=>{
                 container.appendChild(table)
             }else{
 
-            }
+            }}
 
             console.log(res)
         })

@@ -62,11 +62,28 @@ nav2{
 nav2>div{
     border-left: 1px solid black;
     border-right: 1px solid black;
+    transition: all 0.4s ease-in-out;
+}
+nav2>div:hover{
+    background-color: white;
+    scale: 1;
+    color: #525667E0;
+    user-select: none;
 }
 nav div{
-    background-color: #00B7FF;
+    background-color: #666a78;
     border-left: 10px solid red;
     text-align: center;
+    font-weight: bolder;
+    transition: all 0.2s ease-in-out;
+}
+nav div:hover{
+    background-color: #ffffff;
+    color: #666a78;
+    border-left: 1px solid red;
+    text-align: center;
+    font-weight: bolder;
+    user-select: none;
 }
 body>section:nth-child(1),body>section:nth-child(2){
     display: flex;
@@ -101,6 +118,12 @@ body>section:nth-child(1),body>section:nth-child(2){
     align-content: center;
     height: 33%;
     border-top: 1px solid black;
+}
+#tiposdegrafico>div:hover{
+    background-color: white;
+    scale: 1;
+    color: #525667E0;
+    user-select: none;
 }
 
 .volver-atras,.volver-atras-an {
@@ -578,7 +601,9 @@ input::-moz-focus-inner {
 }
 /* tabla */
 #container{
-    width: 100%;
+    margin-top: 2em;
+    width: 90%;
+    overflow: scroll;
     background-color: rgba(31, 31, 28, 0.85);
 }
 table{

@@ -32,3 +32,10 @@ export function esnodelist(nodes){
     NodeList.prototype.isPrototypeOf(nodes)
 
 }
+var tokenx
+export function setToken(X){
+     tokenx=X
+}
+export function getToken(){
+    return tokenx
+}

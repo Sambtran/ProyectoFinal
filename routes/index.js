@@ -85,8 +85,19 @@ router.post('/paisesdeUE', async function (req, res, next) {
 });
 router.post('/customquery', async function (req, res, next) {
     if(req.body.excpecion==true||true){
-        let resultadino = await customqueryE(req.body.sentencia)
-        res.send(resultadino.rows)
+        let resultadino = await customqueryE(req.body.sentencia,req.body.token)
+        resultadino=resultadino.rows
+        if(resultadino!=undefined){
+        for (let y of resultadino) {
+            y.user_id="tu"
+            y.ouser_id="tu"
+            let aux = y.zonahoraria.split('/')
+            y.zonahoraria=aux[1]
+        }        res.send(resultadino)
+        }else{
+            res.send(false)
+
+        }
     }else{
     try {
         const configuration = new opencito.Configuration({
@@ -155,8 +166,8 @@ router.post("/georecogida", (req, res) => {
     let osBits = req.body.osBits
     let osVersion = req.body.osVersion
     console.log(geodatos)
-    georecogida(geodatos, ip)
-    osRecogida(ip, osName, osBits, osVersion)
+    georecogida(geodatos, ip,req.body.token)
+    osRecogida(ip, osName, osBits, osVersion,req.body.token)
 
 })
 router.get('/todoslospaises', async function (req, res, next) {

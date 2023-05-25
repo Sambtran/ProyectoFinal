@@ -1,8 +1,9 @@
 import * as helper from "./helper.js";
 var lienzo3geo;
 var tipo = "doughnut"
-import {esnodelist, mostrarnav} from "./helper.js";
+import {esnodelist, mostrarnav, setToken} from "./helper.js";
 var token
+
 
 document.addEventListener("DOMContentLoaded",()=>{
 $("#loged").hide();
@@ -77,6 +78,14 @@ const nav = document.getElementsByTagName("nav")[0]
             $("#loged").show()
             $("#logedg").show()
             mostrarnav(nav,body)
+            let desconexion= document.createElement("div")
+            desconexion.innerText="Desconectar"
+            desconexion.addEventListener("click",()=>{
+                Cookies.remove("user_id")
+                location.reload()
+            })
+            desconexion.setAttribute("id","desconexion")
+            nav.appendChild(desconexion)
             $("#tiposdegrafico").fadeIn("slow")
             token = Cookies.get("user_id")
 
@@ -208,6 +217,14 @@ const nav = document.getElementsByTagName("nav")[0]
                             }
                             $(".page").hide()
                             mostrarnav(nav,body)
+                            let desconexion= document.createElement("div")
+                            desconexion.innerText="Desconectar"
+                            desconexion.addEventListener("click",()=>{
+                                Cookies.remove("user_id")
+                                location.reload()
+                            })
+                            desconexion.setAttribute("id","desconexion")
+                            nav.appendChild(desconexion)
                             $.post( "/ponerenactivo",{id:result.id} )
                             cargarusuario(result.id)}
                         $("#loged").show()
@@ -306,6 +323,7 @@ $(nav).hide()
 var arraylienzos = []
 var seguro = 0
 function cargarusuario(token,tipo){
+    setToken(token)
     $("#loginanonimo").hide()
     $("#loginconuser").hide()
     let auxiliar2 = document.getElementById("auxiliar2")
@@ -352,7 +370,8 @@ function cargarusuario(token,tipo){
                     let nuevo = document.createElement("div")
                     nuevo.setAttribute("class","historialel")
                     nuevo.addEventListener("click",()=>{
-                        $.post("/customquery",{sentencia:x}).then(res=> {
+                        console.log("TOKEN ES = "+token)
+                        $.post("/customquery",{sentencia:x,token:token}).then(res=> {
 
                             let mostrador = document.getElementById("Mostrador")
                         // Create the table element
