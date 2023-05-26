@@ -4,7 +4,9 @@ var tipo = "doughnut"
 import {esnodelist, mostrarnav, setToken} from "./helper.js";
 var token
 
-
+if(screen.width<768){
+    window.location.replace("/movil");
+}
 document.addEventListener("DOMContentLoaded",()=>{
 $("#loged").hide();
 $("#logedg").hide()

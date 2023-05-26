@@ -25,7 +25,23 @@ todoslospaises().then(todoslospaises1 => {
 
 })
 dotenv.config()
+router.get('/movil', function (req, res, next) {
+    todoslospaises().then(todoslospaises1 => {
+        for (let X of todoslospaises1.rows) {
+            let seguro
+            for (let x of arraydetodoslospaises) {
+                if (X.pais == x.pais) {
+                    seguro = true
+                }
+            }
+            if (seguro != true) {
+                arraydetodoslospaises.push(X)
+            }
+        }
+    })
+    res.render('./movil.ejs', {title: 'Express', todoslospaises: arraydetodoslospaises});
 
+});
 /* GET home page. */
 router.get('/', function (req, res, next) {
     todoslospaises().then(todoslospaises1 => {

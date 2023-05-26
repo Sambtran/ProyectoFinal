@@ -607,7 +607,6 @@ input::-moz-focus-inner {
     background-color: rgba(31, 31, 28, 0.85);
 }
 table{
-    width:100%;
     table-layout: fixed;
 }
 .tbl-header{
