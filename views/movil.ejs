@@ -14,9 +14,14 @@
             integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="module" src="/javascripts/movil.js"></script>
+    <script type="module" src="/javascripts/customquery.js"></script>
 
 </head>
 <body>
+<nav>
+    <h1>KAFKA ANALYZER</h1>
+</nav>
+<main>
     <section id="loginanonimo">
         Login Anonimo
     </section>
@@ -35,6 +40,107 @@
                 </section>
             </article></div>
     </section>
+    <article id="logedg">
+        <nav2 id="navusuario">
+            <div>Comunes</div>
+            <div>Custom query</div>
+            <div>Historial</div>
+        </nav2>
+        <article id="auxiliar2">
+            <article id="contgeneral">
+                <aside id="tiposdegrafico">
+                    <div class="tiposdegrafico">
+                        Barras
+                    </div>
+                    <div class="tiposdegrafico">
+                        donut
+                    </div>
+                    <div class="tiposdegrafico">
+                        3D
+                    </div>
+                </aside>
+                <section id="loged">
+                    <article id="lienzocontainers">
+                        <div class="login-box page">
+
+                            <h2>Login</h2>
+                            <form>
+                                <div class="user-box">
+                                    <input type="text" id="nickname" name="" required="">
+                                    <label>Username</label>
+                                </div>
+                                <div class="user-box" >
+                                    <input type="password"  id="password" name="" required="">
+                                    <label>Password</label>
+                                </div>
+                        <div id="cokiloged">
+                            <p>Recordar en este navegador</p><input id="recordar" type="checkbox">
+                        </div>
+                            <a href="#" id="submit">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    Submit
+                                </a>
+                            </form>
+                        </div>
+                        <article id="contenedordegraficos">
+                            <article id="geo">
+                                <div>
+                                    <canvas class="lienzoGEO" id="lienzeogeo1"></canvas>
+                                </div>
+                                <div>
+
+                                    <canvas class="lienzoGEO" id="lienzeogeo2"></canvas>
+                                </div>
+                                <div id="selectpaisdiv">
+                                    <select id="selectpais">
+                                        <% for (let X of todoslospaises){
+                                        %>
+                                            <% console.log("pais=  " + X.pais) %>
+                                            <option value= <%= X.pais %>> <%= X.pais %> </option>
+                                        <%
+                                        } %>
+                                    </select>
+                                    <canvas class="lienzoGEO" id="lienzeogeo3"></canvas>
+                                </div>
+                                <div>
+                                    <canvas class="lienzoGEO" id="lienzeogeo4"></canvas>
+                                </div>
+                            </article>
+                        </article>
+                        <article>
+                            <article id="OS">
+                                <div>
+                                    <canvas class="lienzoOS" id="lienzoOS1"></canvas>
+                                </div>
+                                <div>
+                                    <canvas id="lienzoOS2" class="lienzoOS"></canvas>
+                                </div>
+                                <div>
+                                    <canvas id="lienzoOS3" class="lienzoOS"></canvas>
+                                </div>
+                                <div>
+                                    <canvas id="lienzoOS4" class="lienzoOS"></canvas>
+                                </div>
+                            </article>
+                        </article>
+                    </article>
+                </section>
+            </article>
+            <article id="customquery">
+                <input id="sentencia" type="text">
+                <button id="ejecutar">Ejectuar</button>
+                <div id="container"></div>
+            </article>
+            <article id="historial">
+                <article id="subhistorial"></article>
+                <article id="Mostrador"></article>
+            </article>
+        </article>
+    </article>
+</main>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </html>
