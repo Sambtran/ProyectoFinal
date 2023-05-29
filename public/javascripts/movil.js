@@ -180,7 +180,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
                 })
             })
-            $("#loginconuser").bind("click touchstart",(ev)=>{
+            $("#loginconuser").bind("click",(ev)=>{
                 $("#loginconuser").fadeOut("slow")
                 $("#loginanonimo").fadeOut("slow")
                 $("#navusuario").hide()
@@ -191,7 +191,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
             })
 
-            $("#submit").bind("click touchstart",()=>{
+            $("#submit").bind("click",()=>{
                 let user = $("#nickname").val()
                 let password =   $("#password").val()
                 $.ajax({
