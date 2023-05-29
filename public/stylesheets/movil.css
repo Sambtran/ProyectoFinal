@@ -730,10 +730,11 @@ html {
 
 /* tabla */
 #container{
+    background-color: #474A59FF ;
+    width: 80%;
+    height: 40vh;
     margin-top: 2em;
-    width: 90%;
     overflow: scroll;
-    background-color: rgba(31, 31, 28, 0.85);
 }
 table{
     table-layout: fixed;

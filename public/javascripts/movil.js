@@ -68,6 +68,10 @@ document.addEventListener("DOMContentLoaded",()=>{
             cargarusuario(Cookies.get("user_id"))
             $("#loged").show()
             $("#logedg").show()
+            let salires=document.getElementsByClassName("desconexion")
+            for (const salire of salires) {
+                salire.remove()
+            }
             mostrarnav(nav,body)
             let desconexion= document.createElement("div")
             desconexion.innerText="Desconectar"
@@ -75,7 +79,9 @@ document.addEventListener("DOMContentLoaded",()=>{
                 Cookies.remove("user_id")
                 location.reload()
             })
+            desconexion.setAttribute("class","desconexion")
             desconexion.setAttribute("id","desconexion")
+
             nav.appendChild(desconexion)
             $("#tiposdegrafico").fadeIn("slow")
             token = Cookies.get("user_id")
@@ -203,13 +209,19 @@ document.addEventListener("DOMContentLoaded",()=>{
                             }
                             $(".page").hide()
                             mostrarnav(nav,body)
+                            let salires=document.getElementsByClassName("desconexion")
+                            for (const salire of salires) {
+                                salire.remove()
+                            }
                             let desconexion= document.createElement("div")
                             desconexion.innerText="Desconectar"
                             desconexion.addEventListener("click",()=>{
                                 Cookies.remove("user_id")
                                 location.reload()
                             })
+                            desconexion.setAttribute("class","desconexion")
                             desconexion.setAttribute("id","desconexion")
+
                             nav.appendChild(desconexion)
                             $.post( "/ponerenactivo",{id:result.id} )
                             cargarusuario(result.id)}
