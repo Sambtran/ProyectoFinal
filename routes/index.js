@@ -125,7 +125,7 @@ router.post('/customquery', async function (req, res, next) {
             messages: [{role: "user", content: 'Con la tabla os en el esquema "Informacion" con los campos: osName TIPO:VARCHAR (Nombre del sistema operativo),osip TIPO:VARCHAR (ip del registro),bits(true or false, si es true es 64 bits si es false son 32),osVersion TIPO:VARCHAR (Version del sistema operativo). Y la tabla geodata en el esquema "Informacion" con los campos: ip TIPO:VARCHAR (ip del registro), pais TIPO:VARCHAR (Codigo del pais), region TIPO:VARCHAR (Codigo de la region),eu(Si es true esta en la Union europea, si es falso no lo esta),zonahoraria TIPO:VARCHAR (zona horaria del registro),date(fecha que se creo el registro),city TIPO:VARCHAR (ciudad) creame una consulta sql en postgres que me indique ' +
                    req.body.sentencia+ ' rodeame los campos con comillas'}]
         })
-        console.log(resultado.data.choices[0].message)
+       let resit = await customqueryE(resultado.data.choices[0].message)
     } catch (error) {
         console.log(error)
     }}
