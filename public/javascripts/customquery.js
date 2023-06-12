@@ -8,6 +8,10 @@ document.addEventListener("DOMContentLoaded",()=>{
     let valor3 = document.getElementById("valor3")
     let ejecutar = document.getElementById("ejecutar")
     let container = document.getElementById("container")
+    if(container==undefined){
+         container = document.getElementById("mostradorp")
+
+    }
     sentencia.placeholder="SELECT * FROM TODO"
     $("#customquery").hide()
     $("#historial").hide()
