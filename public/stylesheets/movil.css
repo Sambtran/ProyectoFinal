@@ -426,7 +426,7 @@ html {
 .login-box {
     position: absolute;
     scale: 3;
-    top:140%;
+    top:100%;
     left: 100%;
     width: 400px;
     padding: 40px;
