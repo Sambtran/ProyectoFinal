@@ -321,6 +321,9 @@ document.addEventListener("DOMContentLoaded",()=>{
 var arraylienzos = []
 var seguro = 0
 function cargarusuario(token,tipo){
+    let ment = document.getElementsByTagName("main")[0]
+    ment.style.gridTemplateRows="1fr"
+    ment.style.height=""
     setToken(token)
     $("#loginanonimo").hide()
     $("#loginconuser").hide()
