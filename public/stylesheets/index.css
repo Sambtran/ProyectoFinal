@@ -602,7 +602,7 @@ input::-moz-focus-inner {
 /* tabla */
 #container{
     margin-top: 2em;
-    width: 90%;
+    width: 30vw;
     overflow: scroll;
     background-color: rgba(31, 31, 28, 0.85);
 }
